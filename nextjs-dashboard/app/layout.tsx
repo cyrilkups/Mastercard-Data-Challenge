@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import PreLoader from "@/components/PreLoader";
+import SessionProvider from "@/components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: "Data Nova Analytics Dashboard",
   description: "Inclusive Growth Score Analytics Platform",
   icons: {
-    icon: '/app-logo.png',
+    icon: "/app-logo.png",
   },
 };
 
@@ -28,16 +29,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        <PreLoader />
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <Header />
-            <main className="flex-1 overflow-y-auto bg-[#F5F7FA] p-8">
-              {children}
-            </main>
+        <SessionProvider>
+          <PreLoader />
+          <div className="flex h-screen overflow-hidden">
+            <Sidebar />
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <Header />
+              <main className="flex-1 overflow-y-auto bg-[#F5F7FA] p-8">
+                {children}
+              </main>
+            </div>
           </div>
-        </div>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -3,11 +3,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Search, Bell, ChevronDown } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
+  const { data: session } = useSession();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+
+  const userName = session?.user?.name || "User";
+  const userEmail = session?.user?.email || "user@example.com";
+  const userInitials = userName
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .substring(0, 2);
 
   const notifications = [
     {
@@ -38,7 +49,7 @@ export default function Header() {
         {/* Welcome Text */}
         <div>
           <h2 className="text-2xl font-poppins font-semibold text-gray-900">
-            Welcome back, Cyril
+            Welcome back, {userName}
           </h2>
           <p className="text-sm text-gray-500 mt-1">
             Here&apos;s what&apos;s happening with your analytics today
@@ -97,7 +108,7 @@ export default function Header() {
               className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors"
             >
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-primary to-orange-accent flex items-center justify-center text-white font-semibold text-sm">
-                CK
+                {userInitials}
               </div>
               <ChevronDown size={16} className="text-gray-600" />
             </button>
@@ -106,14 +117,17 @@ export default function Header() {
             {showProfile && (
               <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
                 <div className="p-4 border-b border-gray-200">
-                  <p className="font-semibold text-gray-900">Cyril Kups</p>
-                  <p className="text-sm text-gray-500">cyril@igsplatform.com</p>
+                  <p className="font-semibold text-gray-900">{userName}</p>
+                  <p className="text-sm text-gray-500">{userEmail}</p>
                 </div>
                 <div className="p-2">
                   <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
                     Profile Settings
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg mt-2">
+                  <button 
+                    onClick={() => signOut({ callbackUrl: '/login' })}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg mt-2"
+                  >
                     Sign Out
                   </button>
                 </div>
