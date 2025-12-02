@@ -1,13 +1,110 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-async function fetchReportData(reportType: string, dateRange: string) {
-  const response = await fetch(`/api/report-data?type=${reportType}&dateRange=${dateRange}`);
-  if (!response.ok) throw new Error('Failed to fetch report data');
-  return response.json();
-}
+// Sample IGS data for Lonoke County
+const sampleData = {
+  metadata: { county: 'Lonoke County, Arkansas', tract: '20800' },
+  executive_summary: {
+    current_igs: 27.0,
+    igs_change_pct: -3.6,
+    status: 'Declining',
+    current_place: 21.0,
+    place_change_pct: 0.0,
+    current_economy: 20.0,
+    economy_change_pct: -9.1,
+    current_community: 40.0,
+    community_change_pct: -2.4,
+  },
+  historical_data: [
+    { year: 2019, igs_score: 40, place_score: 49, economy_score: 42, community_score: 28 },
+    { year: 2020, igs_score: 34, place_score: 30, economy_score: 30, community_score: 41 },
+    { year: 2021, igs_score: 31, place_score: 23, economy_score: 29, community_score: 42 },
+    { year: 2022, igs_score: 29, place_score: 20, economy_score: 25, community_score: 43 },
+    { year: 2023, igs_score: 28, place_score: 21, economy_score: 22, community_score: 41 },
+    { year: 2024, igs_score: 27, place_score: 21, economy_score: 20, community_score: 40 },
+  ],
+  detailed_indicators: {
+    economic: {
+      median_income: 36500,
+      income_growth: -4.2,
+      minority_business_pct: 8.3,
+      minority_business_growth: 0.24,
+    },
+    infrastructure: {
+      broadband_access: 58.7,
+      broadband_growth: 3.2,
+      housing_burden: 86.5,
+      housing_burden_change: -0.6,
+    },
+    community: {
+      early_education: 33.4,
+      early_ed_growth: -5.1,
+    },
+  },
+  ml_model_info: {
+    model_type: 'Random Forest Regressor',
+    r2_score: 0.73,
+    training_samples: 18,
+    features_used: 78,
+    solution_counties: ['Beltrami County, MN', 'Chaffee County, CO', 'Fulton County, NY'],
+    top_features: [
+      { feature: 'Median Household Income', importance: 0.1245 },
+      { feature: 'Broadband Access %', importance: 0.0987 },
+      { feature: 'Early Education Enrollment %', importance: 0.0823 },
+      { feature: 'Housing Cost Burden %', importance: 0.0765 },
+      { feature: 'Minority-Owned Businesses %', importance: 0.0654 },
+      { feature: 'Population Density', importance: 0.0432 },
+      { feature: 'Bachelor Degree or Higher %', importance: 0.0398 },
+      { feature: 'Poverty Rate %', importance: 0.0365 },
+      { feature: 'Unemployment Rate %', importance: 0.0321 },
+      { feature: 'Health Insurance Coverage %', importance: 0.0287 },
+    ],
+  },
+  trends_analysis: {
+    igs_trend: 'Declining',
+    annual_change: -7.2,
+    five_year_change: -32.5,
+  },
+  ml_forecasts: [
+    { year: 2024, baseline: 27.0, housing: 28.2, education: 29.1, business: 28.5, combined: 30.8 },
+    { year: 2025, baseline: 26.7, housing: 29.5, education: 31.4, business: 30.2, combined: 34.3 },
+    { year: 2026, baseline: 26.4, housing: 30.8, education: 33.7, business: 31.9, combined: 37.8 },
+    { year: 2027, baseline: 26.1, housing: 32.1, education: 36.0, business: 33.6, combined: 41.3 },
+    { year: 2028, baseline: 25.8, housing: 33.4, education: 38.3, business: 35.3, combined: 44.0 },
+    { year: 2029, baseline: 25.5, housing: 34.7, education: 40.6, business: 37.0, combined: 42.3 },
+    { year: 2030, baseline: 25.2, housing: 36.0, education: 42.9, business: 38.7, combined: 45.7 },
+  ],
+  threshold: 45,
+  model_accuracy: 0.73,
+  model_details: {
+    algorithm: 'Random Forest Regressor',
+    training_counties: 3,
+    training_samples: 18,
+    features: 78,
+    cross_validation_score: 0.71,
+  },
+  intervention_impacts: {
+    housing_affordability: {
+      description: 'Reduce housing cost burden by 10%',
+      igs_impact: 9.0,
+    },
+    early_education: {
+      description: 'Increase early education enrollment to 60%',
+      igs_impact: 15.9,
+    },
+    small_business: {
+      description: 'Increase minority-owned businesses by 5%',
+      igs_impact: 11.7,
+    },
+    combined: {
+      description: 'All three interventions together',
+      igs_impact: 20.5,
+    },
+  },
+};
 
-function formatDataForPDF(data: any, reportType: string) {
+function formatDataForPDF(reportType: string) {
+  const data = sampleData;
   switch (reportType) {
     case 'comprehensive':
       return {
@@ -283,8 +380,7 @@ function formatDataForPDF(data: any, reportType: string) {
 
 export async function generatePDF(reportType: string, dateRange: string) {
   try {
-    const rawData = await fetchReportData(reportType, dateRange);
-    const pdfData = formatDataForPDF(rawData, reportType);
+    const pdfData = formatDataForPDF(reportType);
     
     const doc = new jsPDF();
     let yPosition = 20;
@@ -302,7 +398,7 @@ export async function generatePDF(reportType: string, dateRange: string) {
     yPosition += 5;
     doc.text(`Date Range: ${dateRange.replace('-', ' ').toUpperCase()}`, 20, yPosition);
     yPosition += 5;
-    doc.text(`County: ${rawData.metadata?.county || 'Lonoke County, Arkansas'}`, 20, yPosition);
+    doc.text(`County: ${sampleData.metadata?.county || 'Lonoke County, Arkansas'}`, 20, yPosition);
     yPosition += 10;
 
     // Sections
