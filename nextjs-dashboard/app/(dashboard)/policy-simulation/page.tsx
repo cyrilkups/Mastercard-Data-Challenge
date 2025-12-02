@@ -43,7 +43,7 @@ export default function PolicySimulationPage() {
     try {
       // Client-side simulation using pre-trained model coefficients
       // Based on Random Forest model (R²=0.73) trained on Lonoke County + solution counties
-      
+
       const baseline2024 = {
         igs_score: 27.0,
         place_score: 21.0,
@@ -58,28 +58,36 @@ export default function PolicySimulationPage() {
 
       // Calculate intervention scores
       const intervention = {
-        igs_score: baseline2024.igs_score + (housingImpact + educationImpact + businessImpact) * 0.028,
+        igs_score:
+          baseline2024.igs_score +
+          (housingImpact + educationImpact + businessImpact) * 0.028,
         place_score: baseline2024.place_score + housingImpact,
         economy_score: baseline2024.economy_score + businessImpact,
-        community_score: baseline2024.community_score + educationImpact - (housingImpact * 0.2),
+        community_score:
+          baseline2024.community_score + educationImpact - housingImpact * 0.2,
       };
 
       const impacts = {
         igs_score: intervention.igs_score - baseline2024.igs_score,
         place_score: intervention.place_score - baseline2024.place_score,
         economy_score: intervention.economy_score - baseline2024.economy_score,
-        community_score: intervention.community_score - baseline2024.community_score,
+        community_score:
+          intervention.community_score - baseline2024.community_score,
       };
 
       // Project to 2030
-      const projection = [2024, 2025, 2026, 2027, 2028, 2029, 2030].map((year, i) => {
-        const progress = i / 6;
-        return {
-          year: year.toString(),
-          baseline: parseFloat((27.0 - 0.3 * i).toFixed(2)),
-          intervention: parseFloat((27.0 + impacts.igs_score * progress).toFixed(2)),
-        };
-      });
+      const projection = [2024, 2025, 2026, 2027, 2028, 2029, 2030].map(
+        (year, i) => {
+          const progress = i / 6;
+          return {
+            year: year.toString(),
+            baseline: parseFloat((27.0 - 0.3 * i).toFixed(2)),
+            intervention: parseFloat(
+              (27.0 + impacts.igs_score * progress).toFixed(2)
+            ),
+          };
+        }
+      );
 
       const data = {
         baseline: baseline2024,
