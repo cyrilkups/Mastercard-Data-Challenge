@@ -12,6 +12,8 @@ SUBMISSION CHECKLIST - ALL REQUIRED COMPONENTS
 ✅ 1. SAMPLE_SUBMISSION.CSV
    Location: igs_ml/output/Sample_submission.csv
    
+   A combined submission file with both train and test sets
+   
    Contents:
    - 26 total rows (all data points)
    - 24 training rows (years 2020-2023)
