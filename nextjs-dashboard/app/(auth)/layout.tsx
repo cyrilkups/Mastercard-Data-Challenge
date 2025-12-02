@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -10,18 +10,18 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Data Nova Analytics Dashboard",
-  description: "Inclusive Growth Score Analytics Platform",
+  title: "Login - Data Nova",
+  description: "Sign in to Data Nova Analytics Dashboard",
   icons: {
     icon: "/app-logo.png",
   },
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>

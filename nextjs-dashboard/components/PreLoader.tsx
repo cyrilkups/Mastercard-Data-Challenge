@@ -1,19 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 export default function PreLoader() {
   const [isLoading, setIsLoading] = useState(true);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Preloader duration: 2.5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
+
+      // After preloader, check authentication for protected routes
+      const isAuthPage = pathname === "/login" || pathname === "/signup";
+
+      if (!isAuthPage && status === "unauthenticated") {
+        router.push("/login");
+      }
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [status, router, pathname]);
 
   if (!isLoading) return null;
 

@@ -1,11 +1,14 @@
-export { default } from 'next-auth/middleware';
+import { withAuth } from 'next-auth/middleware';
+
+// Only protect API routes, not pages (handled by PreLoader)
+export default withAuth({
+  pages: {
+    signIn: '/login',
+  },
+});
 
 export const config = {
   matcher: [
-    '/',
-    '/indicators/:path*',
-    '/tract-explorer/:path*',
-    '/scenario-analysis/:path*',
-    '/recommendations/:path*',
+    '/api/protected/:path*',
   ],
 };
