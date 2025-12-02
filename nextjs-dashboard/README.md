@@ -1,4 +1,4 @@
-# IGS Analytics Dashboard - Next.js + Tailwind CSS
+# Data Nova Analytics Dashboard - Next.js + Tailwind CSS
 
 A modern, responsive analytics dashboard for Inclusive Growth Score (IGS) data visualization and analysis.
 

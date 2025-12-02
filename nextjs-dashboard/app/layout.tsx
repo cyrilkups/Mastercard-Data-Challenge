@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "IGS Analytics Dashboard",
+  title: "Data Nova Analytics Dashboard",
   description: "Inclusive Growth Score Analytics Platform",
 };
 
