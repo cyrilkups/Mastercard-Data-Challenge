@@ -19,9 +19,9 @@ function formatDataForPDF(data: any, reportType: string) {
               head: [['Metric', 'Current Value', 'Change %', 'Status']],
               body: [
                 ['IGS Score', data.executive_summary?.current_igs?.toFixed(2) || 'N/A', data.executive_summary?.igs_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.status || 'N/A'],
-                ['Place Score', data.executive_summary?.current_place?.toFixed(2) || 'N/A', data.executive_summary?.place_change_pct?.toFixed(2) + '%' || 'N/A', (data.executive_summary?.place_change_pct > 0 ? 'Improving' : 'Declining') || 'N/A'],
-                ['Economy Score', data.executive_summary?.current_economy?.toFixed(2) || 'N/A', data.executive_summary?.economy_change_pct?.toFixed(2) + '%' || 'N/A', (data.executive_summary?.economy_change_pct > 0 ? 'Improving' : 'Declining') || 'N/A'],
-                ['Community Score', data.executive_summary?.current_community?.toFixed(2) || 'N/A', data.executive_summary?.community_change_pct?.toFixed(2) + '%' || 'N/A', (data.executive_summary?.community_change_pct > 0 ? 'Improving' : 'Declining') || 'N/A']
+                ['Place Score', data.executive_summary?.current_place?.toFixed(2) || 'N/A', data.executive_summary?.place_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.place_change_pct != null ? (data.executive_summary.place_change_pct > 0 ? 'Improving' : 'Declining') : 'N/A'],
+                ['Economy Score', data.executive_summary?.current_economy?.toFixed(2) || 'N/A', data.executive_summary?.economy_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.economy_change_pct != null ? (data.executive_summary.economy_change_pct > 0 ? 'Improving' : 'Declining') : 'N/A'],
+                ['Community Score', data.executive_summary?.current_community?.toFixed(2) || 'N/A', data.executive_summary?.community_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.community_change_pct != null ? (data.executive_summary.community_change_pct > 0 ? 'Improving' : 'Declining') : 'N/A']
               ]
             }
           },
