@@ -213,8 +213,8 @@ export default function Sidebar() {
                 </h3>
                 <p className="text-sm">
                   Analyze historical trends from 2019-2024. See how Lonoke
-                  County&apos;s Inclusive Growth Score has changed over time with
-                  interactive charts.
+                  County&apos;s Inclusive Growth Score has changed over time
+                  with interactive charts.
                 </p>
               </section>
 
@@ -245,9 +245,10 @@ export default function Sidebar() {
                   🎮 Policy Simulation
                 </h3>
                 <p className="text-sm">
-                  <strong>Interactive tool</strong> to test &quot;what-if&quot; scenarios.
-                  Adjust housing affordability, early education, and business
-                  support sliders to see predicted impacts on IGS scores.
+                  <strong>Interactive tool</strong> to test &quot;what-if&quot;
+                  scenarios. Adjust housing affordability, early education, and
+                  business support sliders to see predicted impacts on IGS
+                  scores.
                 </p>
               </section>
 
