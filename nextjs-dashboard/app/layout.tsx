@@ -15,6 +15,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Data Nova Analytics Dashboard",
   description: "Inclusive Growth Score Analytics Platform",
+  icons: {
+    icon: '/app-logo.png',
+  },
 };
 
 export default function RootLayout({
