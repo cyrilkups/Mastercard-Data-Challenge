@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Data
+*.csv.backup
+*.csv.old
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+Data Drive Datasets/*
+!Data Drive Datasets/.gitkeep
+
+# Node.js (for dashboard)
+node_modules/
+.next/

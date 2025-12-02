@@ -1,0 +1,8 @@
+year,estimate_type,county,total_households,households_with_computer,households_with_broadband,households_no_internet,broadband_access_pct,no_internet_pct,computer_ownership_pct
+2019,1-year,"Lonoke County, Arkansas",72630,70240,66692,3548,91.82,4.89,96.71
+2020,5-year,"Lonoke County, Arkansas",72496,67826,62707,4933,86.5,6.8,93.56
+2021,1-year,"Lonoke County, Arkansas",74125,71510,68622,2749,92.58,3.71,96.47
+2022,1-year,"Lonoke County, Arkansas",74488,71921,68431,3455,91.87,4.64,96.55
+2023,1-year,"Lonoke County, Arkansas",75289,73207,71883,1324,95.48,1.76,97.23
+2023,5-year,"Lonoke County, Arkansas",74039,71368,67742,3431,91.5,4.63,96.39
+2024,1-year,"Lonoke County, Arkansas",75721,74673,72448,2225,95.68,2.94,98.62

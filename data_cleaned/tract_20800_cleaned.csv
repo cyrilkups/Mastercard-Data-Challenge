@@ -1,0 +1,7 @@
+tract,year,median_income,broadband_access_pct,minority_owned_businesses_pct,housing_cost_burden_pct,early_education_enrollment_pct,place_score,economy_score,community_score,igs_score,income_growth,broadband_growth,minority_business_growth,housing_burden_change,early_ed_growth
+05085020800,2019,36.9,44.1,-40.0,91.0,50.0,34,30,54,40,0.0,0.0,0.0,0.0,0.0
+05085020800,2020,14.1,45.7,83.3,89.5,47.8,32,32,44,36,-22.8,1.6,123.3,-1.5,-2.2
+05085020800,2021,-2.9,45.8,-36.4,86.6,31.1,13,7,44,21,-17.0,0.1,-119.7,-2.9,-16.7
+05085020800,2022,-12.1,53.2,-14.3,87.0,33.1,20,22,42,28,-9.2,7.4,22.1,0.4,2.0
+05085020800,2023,-15.6,58.7,8.3,86.5,33.4,21,24,40,28,-3.5,5.5,22.6,-0.5,0.3
+05085020800,2024,-15.6,58.7,8.3,86.5,33.4,21,20,40,27,0.0,0.0,0.0,0.0,0.0

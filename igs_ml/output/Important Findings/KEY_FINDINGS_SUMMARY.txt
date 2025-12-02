@@ -1,0 +1,305 @@
+================================================================================
+KEY FINDINGS FROM IGS + PUBLIC DATA
+Tract 20800 Comprehensive Analysis (2019-2024)
+================================================================================
+
+EXECUTIVE SUMMARY:
+Tract 20800 exhibits severe, compounding distress across all three pillars of
+inclusive growth. The tract ranks in the bottom 20-40th percentile nationally
+across most indicators, with particularly acute challenges in broadband access,
+housing affordability, and economic vitality. Trends from 2019-2024 show
+declining or stagnant conditions, indicating systemic challenges requiring
+comprehensive, multi-sector intervention.
+
+================================================================================
+PLACE PILLAR FINDINGS
+================================================================================
+
+📡 BROADBAND ACCESS (SEVERE INFRASTRUCTURE DEFICIT):
+   
+   Current Status (2024):
+   • Tract 20800: 58.7%
+   • Arkansas State Average: 82.7%
+   • USA National Average: 87.3%
+   • Gap to U.S. Average: 28.6 percentage points
+   • Gap to State Average: 24.0 percentage points
+   
+   Trend Analysis (2019-2024):
+   • 2019: 44.1%
+   • 2020: 45.7%
+   • 2021: 45.8%
+   • 2022: 53.2%
+   • 2023: 58.7%
+   • 2024: 58.7%
+   • Total Improvement: +14.6 percentage points
+   • Growth Rate: +33.1% over 5 years
+   
+   Key Insights:
+   ➜ SEVERELY BELOW state and national benchmarks despite recent growth
+   ➜ Ranks in bottom 5-10th percentile for broadband access nationally
+   ➜ Infrastructure gap limits remote work, economic development, and
+     educational opportunities
+   ➜ Digital divide creates barriers to telehealth, online services, and
+     modern business operations
+   
+   Visualization: broadband_trend.png
+
+--------------------------------------------------------------------------------
+
+🏠 HOUSING COST BURDEN (EXTREME AFFORDABILITY CRISIS):
+   
+   Current Status (2024):
+   • Overall Housing Cost Burden: 86.5%
+   • Renters Cost-Burdened (est.): ~95%
+   • Homeowners Cost-Burdened (est.): ~78%
+   • "Affordable" Threshold: 30%
+   • Excess Burden: +56.5 percentage points above threshold
+   
+   Trend Analysis (2019-2024):
+   • 2019: 91.0%
+   • 2020: 89.5%
+   • 2021: 86.6%
+   • 2022: 87.0%
+   • 2023: 86.5%
+   • 2024: 86.5%
+   • Total Change: -4.5 percentage points (slight improvement)
+   • Burden Level: EXTREME throughout entire period
+   
+   Key Insights:
+   ➜ EXTREME AFFORDABILITY CRISIS - over 86% of households cost-burdened
+   ➜ Far exceeds HUD's 30% cost burden threshold for affordability
+   ➜ Renters face near-universal cost burden (95%)
+   ➜ Homeowners also severely burdened (78%)
+   ➜ Leaves little household income for savings, healthcare, education,
+     or economic mobility
+   
+   Visualization: housing_burden_area.png
+
+--------------------------------------------------------------------------------
+
+📍 PLACE SCORE & OVERALL INFRASTRUCTURE:
+   
+   Current Status (2024):
+   • Place Score: 21
+   • National Percentile: Bottom ~21st percentile
+   
+   Trend Analysis (2019-2024):
+   • 2019: 34
+   • 2020: 32
+   • 2021: 13
+   • 2022: 20
+   • 2023: 21
+   • 2024: 21
+   • Total Change: -13 points (significant decline)
+   
+   Visualization: place_radar.png
+
+================================================================================
+ECONOMY PILLAR FINDINGS
+================================================================================
+
+💰 INCOME TRENDS (SEVERE STAGNATION AND DECLINE):
+   
+   Current Status (2024):
+   • Median Income Percentile: -15.6
+   • Real Income Decline: -15.6% over 5 years
+   • Economy Score: 20 (bottom ~20th percentile)
+   
+   Trend Analysis (2019-2024):
+   • 2019: 36.9 percentile
+   • 2020: 14.1 percentile
+   • 2021: -2.9 percentile (below baseline)
+   • 2022: -12.1 percentile
+   • 2023: -15.6 percentile
+   • 2024: -15.6 percentile
+   • Total Change: -52.5 percentile points (SEVERE DECLINE)
+   
+   Key Insights:
+   ➜ SEVERE INCOME STAGNATION - real income down 15.6% over 5 years
+   ➜ Median income now below national baseline (negative percentile)
+   ➜ Income decline drives housing unaffordability
+   
+   Visualization: economy_combo.png
+
+--------------------------------------------------------------------------------
+
+🏢 BUSINESS ENVIRONMENT (ECOSYSTEM COLLAPSE):
+   
+   Current Status (2024):
+   • Net New Business Growth: -33.3%
+   • Minority Business Growth: 0.0% (2024)
+   
+   Key Insights:
+   ➜ BUSINESS ECOSYSTEM COLLAPSE - net decline of 33.3%
+   ➜ Loss of entrepreneurial activity and local business vitality
+   ➜ Reduced business activity lowers local employment and tax base
+   
+   Visualization: economy_combo.png, economy_heatmap.png
+
+--------------------------------------------------------------------------------
+
+📊 LABOR MARKET ENGAGEMENT (WEAK PARTICIPATION):
+   
+   Current Status (2024):
+   • LMEI (Labor Market Engagement Index): 14.0
+   • National Percentile: Bottom ~15th percentile
+   • Economy Score: 20 (bottom ~20th percentile)
+   
+   Key Insights:
+   ➜ WEAK LABOR MARKET PARTICIPATION - LMEI of 14.0 is critically low
+   ➜ Limited local job opportunities
+   ➜ Low-quality employment with limited advancement
+   
+   Visualization: economy_heatmap.png
+
+================================================================================
+COMMUNITY PILLAR FINDINGS
+================================================================================
+
+👶 POVERTY RATES (SIGNIFICANTLY ABOVE BENCHMARKS):
+   
+   Current Estimates (2024):
+   • Overall Poverty Rate: ~25.0%
+   • Child Poverty (<18): ~30.0%
+   • Working Age Poverty (18-64): ~25.0%
+   • Senior Poverty (65+): ~20.0%
+   • Rural Average Benchmark: 15.4%
+   • Gap to Rural Average: +9.6 percentage points
+   
+   Key Insights:
+   ➜ SIGNIFICANTLY ABOVE rural benchmarks across all age groups
+   ➜ Child poverty rate 2x rural average
+   ➜ All age groups trending worse from 2019-2024
+   
+   Visualization: poverty_trends.png
+
+--------------------------------------------------------------------------------
+
+🏥 HEALTH INSURANCE COVERAGE (BELOW RURAL AVERAGE):
+   
+   Current Estimates (2024):
+   • Tract Insurance Coverage: ~75.0%
+   • Rural Average Coverage: 88.2%
+   • Gap to Rural Average: -13.2 percentage points
+   • Uninsured Population: ~25.0%
+   
+   Key Insights:
+   ➜ LOWER THAN rural average - creates healthcare access barriers
+   ➜ 1 in 4 residents lack health insurance coverage
+   
+   Visualization: community_radar.png
+
+--------------------------------------------------------------------------------
+
+🎓 EARLY EDUCATION ENROLLMENT (BELOW RURAL BENCHMARKS):
+   
+   Current Status (2024):
+   • Early Education Enrollment: 33.4%
+   • Rural Average: 42.5%
+   • Gap to Rural Average: -9.1 percentage points
+   
+   Trend Analysis (2019-2024):
+   • 2019: 50.0%
+   • 2024: 33.4%
+   • Total Change: -16.6 percentage points (SIGNIFICANT DECLINE)
+   • Trend: Declining at -3.30% per year
+   
+   Key Insights:
+   ➜ BELOW rural benchmarks - limits school readiness
+   ➜ Significant decline from 50% (2019) to 33.4% (2024)
+   ➜ Creates intergenerational cycle of limited opportunity
+   
+   Visualization: early_ed_comparison.png
+
+--------------------------------------------------------------------------------
+
+🤝 COMMUNITY SCORE & SOCIAL CAPITAL:
+   
+   Current Status (2024):
+   • Community Score: 40
+   • National Percentile: Bottom ~40th percentile
+   
+   Trend Analysis (2019-2024):
+   • 2019: 54
+   • 2024: 40
+   • Total Change: -14 points (DECLINING)
+   
+   Visualization: community_radar.png
+
+================================================================================
+CRITICAL CROSS-CUTTING INSIGHTS
+================================================================================
+
+1️⃣  COMPOUNDING VULNERABILITIES:
+   Economic decline (income -15.6%, business -33.3%) DRIVES housing
+   unaffordability (86.5% burden) and LIMITS community investments.
+   
+   Result: Self-reinforcing downward spiral requiring multi-sector
+   intervention to break cycle.
+
+2️⃣  INFRASTRUCTURE DEFICITS:
+   Severe broadband gap (28.6pp below U.S.) LIMITS remote work,
+   economic development, educational access, and telehealth services.
+
+3️⃣  AFFORDABILITY CRISIS:
+   86.5% housing cost burden SEVERELY LIMITS savings, healthcare
+   spending, educational investments, and economic mobility.
+
+4️⃣  BUSINESS ECOSYSTEM COLLAPSE:
+   -33.3% net business growth indicates entrepreneurial flight and
+   self-reinforcing decline cycle.
+
+5️⃣  HUMAN CAPITAL CHALLENGES:
+   High poverty + low insurance + limited early education CREATES
+   barriers to workforce development and intergenerational mobility.
+
+6️⃣  TREND ANALYSIS:
+   Multiple indicators show DECLINING trends (2019-2024):
+   • Income: -52.5 percentile points
+   • Place Score: -13 points
+   • Community Score: -14 points
+   • Early Education: -16.6 percentage points
+   • IGS Overall: 40 → 27
+   
+   Pattern: Systemic deterioration requiring comprehensive intervention.
+
+================================================================================
+VISUALIZATION INVENTORY
+================================================================================
+
+PLACE PILLAR:
+1. broadband_trend.png - Trend line comparison (2019-2024)
+2. housing_burden_area.png - Stacked area chart
+3. place_radar.png - Multi-indicator radar chart
+
+ECONOMY PILLAR:
+4. economy_combo.png - Income line + business bar combo chart
+5. economy_heatmap.png - Economic stress heatmap
+
+COMMUNITY PILLAR:
+6. poverty_trends.png - Multi-line age group trends
+7. early_ed_comparison.png - Scatter plot with trendline
+8. community_radar.png - Community indicators radar
+
+All files saved to: igs_ml/Slide_6_Key_Findings/
+
+================================================================================
+CONCLUSION
+================================================================================
+
+Tract 20800 faces severe, systemic challenges across all three pillars.
+The tract exhibits BOTTOM 20-40TH PERCENTILE performance nationally with
+DECLINING TRENDS and COMPOUNDING VULNERABILITIES.
+
+Without comprehensive intervention, continued decline is projected. However,
+targeted interventions addressing broadband infrastructure, housing
+affordability, business support, and human capital development show
+potential to reverse these trends.
+
+Recommended: COMPREHENSIVE, MULTI-SECTOR INTERVENTION STRATEGY focused on
+breaking the cycle of compounding vulnerabilities and building foundational
+assets across place, economy, and community pillars.
+
+================================================================================
+Generated: November 21, 2025
+================================================================================

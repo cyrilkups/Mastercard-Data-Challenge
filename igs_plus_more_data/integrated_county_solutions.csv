@@ -1,0 +1,13 @@
+county,year,total_firms,employer_firms,nonemployer_firms,total_revenue_k,employer_revenue_k,nonemployer_revenue_k_abs,num_employees,annual_payroll,num_establishments,payroll_q1,nonemployers,nonemployer_revenue_k,igs_score,place_score,economy_score,community_score
+Beltrami County,2020.0,,,,,,,,,1232.0,134374.0,2733.0,123058.0,,,,
+Beltrami County,2023.0,3842.0,842.0,3000.0,3060878.0,2903932.0,156946.0,10735.0,492024.0,1250.0,174672.0,,,,,,
+"Chaffee County, Colorado",2020.0,,,,,,,,,,,,,37.0,34.0,49.0,29.0
+"Chaffee County, Colorado",2021.0,,,,,,,,,,,,,42.0,50.0,42.0,32.0
+"Chaffee County, Colorado",2022.0,,,,,,,,,,,,,42.0,52.0,42.0,34.0
+"Chaffee County, Colorado",2023.0,,,,,,,,,,,,,40.0,49.0,41.0,29.0
+"Chaffee County, Colorado",2024.0,,,,,,,,,,,,,36.0,49.0,30.0,28.0
+Fulton County,2020.0,,,,,,,,,,,,,37.0,34.0,49.0,29.0
+Fulton County,2021.0,,,,,,,,,,,,,42.0,50.0,42.0,32.0
+Fulton County,2022.0,,,,,,,,,,,,,42.0,52.0,42.0,34.0
+Fulton County,2023.0,,,,,,,,,,,,,40.0,49.0,41.0,29.0
+Fulton County,2024.0,,,,,,,,,,,,,36.0,49.0,30.0,28.0

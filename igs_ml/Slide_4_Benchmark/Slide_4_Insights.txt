@@ -1,0 +1,75 @@
+================================================================================
+SLIDE 4: IGS BENCHMARK INSIGHTS
+Tract 20800 Performance vs Arkansas & USA (2020-2024)
+================================================================================
+
+OVERALL PERFORMANCE
+-------------------
+• Tract 20800 ranks in the BOTTOM 20-25% nationally and statewide
+• IGS Score (vs Arkansas): 41 (2020) → 31 (2024) = -24% decline
+• IGS Score (vs USA): 36 (2020) → 28 (2024) = -22% decline
+• Lowest point: 22 (2021) - crisis year
+
+COMPARATIVE RANKING
+-------------------
+• Tract performs slightly better when compared to Arkansas vs USA
+  - Difference: 2-6 percentile points
+  - All years: consistently below 50th percentile (median)
+  - 2024: 31st percentile (AR) vs 28th percentile (USA)
+
+2024 PILLAR BREAKDOWN (vs Arkansas)
+------------------------------------
+• Place Score: 21
+  - Bottom quintile (0-20th percentile)
+  - Critical weaknesses in place-based infrastructure
+
+• Economy Score: 26
+  - Bottom quintile (20-30th percentile)
+  - Economic opportunities severely limited
+
+• Community Score: 46
+  - Just below median (approaching 50th percentile)
+  - Relatively stronger but still below average
+
+All three pillars score BELOW the 50th percentile benchmark.
+
+KEY DISTRESS SIGNALS (2023 Data)
+---------------------------------
+1. Internet Access: 58.7% of households
+   - Score: 2 (vs Arkansas) = 2nd percentile
+   - Score: 1 (vs USA) = 1st percentile
+   - Critical digital divide
+
+2. Home Values: -46.7% change
+   - Arkansas average: +20.6% (67 percentage point gap)
+   - USA average: +42.1% (89 percentage point gap)
+   - Severe property devaluation
+
+TRAJECTORY ANALYSIS
+-------------------
+• Direction of Travel: Declining
+  - Started near middle of pack in 2019-2020
+  - Sharp drop in 2021 (COVID impact)
+  - Partial recovery in 2022-2023
+  - Stagnation in 2024 at low levels
+
+• Comparison Stability:
+  - Arkansas vs USA gap remains consistent (2-6 points)
+  - Suggests structural disadvantages relative to both benchmarks
+  - No signs of convergence toward median
+
+INTERPRETATION
+--------------
+Tract 20800 has fallen into the "left-behind" category:
+- Bottom quartile performance across all metrics
+- Widening gaps in critical indicators (internet, housing)
+- Limited economic and place-based opportunities
+- Community pillar is the only relative strength
+
+This positions the tract in urgent need of targeted interventions
+to reverse declining trends and address systemic disadvantages.
+
+================================================================================
+Data Source: IGS Export CSVs (Compared to State & USA)
+Generated: November 21, 2025
+================================================================================

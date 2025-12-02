@@ -1,0 +1,88 @@
+IGS SCORE PREDICTION - TRAINING REPORT
+============================================================
+
+Date: 2025-11-20 22:19:29
+
+MODELS TRAINED
+------------------------------------------------------------
+  • place_score
+  • economy_score
+  • community_score
+  • igs_score
+
+
+MODEL PERFORMANCE COMPARISON
+------------------------------------------------------------
+         Target  Test R²  Test MAE  Test RMSE  Train R²  CV R² (mean)  CV R² (std)
+    place_score 0.664993  6.794692   8.579573  0.862502     -0.308384     1.100369
+      igs_score 0.553451 10.845438  12.018498  0.923993      0.237967     0.644486
+community_score 0.240534  9.189591   9.973687  0.787195     -0.241746     0.711630
+  economy_score 0.045851  9.457730  11.869264  0.860360      0.330163     0.177416
+
+DETAILED RESULTS BY TARGET
+============================================================
+
+PLACE_SCORE
+------------------------------------------------------------
+Test R²:     0.6650
+Test MAE:    6.7947
+Test RMSE:   8.5796
+Train R²:    0.8625
+CV R² Mean:  -0.3084
+CV R² Std:   1.1004
+
+Top 5 Features:
+  10. early_ed_growth                     0.2436
+  4. housing_cost_burden_pct             0.2231
+  1. median_income                       0.1886
+  2. broadband_access_pct                0.1212
+  7. broadband_growth                    0.0521
+
+ECONOMY_SCORE
+------------------------------------------------------------
+Test R²:     0.0459
+Test MAE:    9.4577
+Test RMSE:   11.8693
+Train R²:    0.8604
+CV R² Mean:  0.3302
+CV R² Std:   0.1774
+
+Top 5 Features:
+  4. housing_cost_burden_pct             0.4263
+  1. median_income                       0.1414
+  7. broadband_growth                    0.1329
+  2. broadband_access_pct                0.0741
+  5. early_education_enrollment_pct      0.0707
+
+COMMUNITY_SCORE
+------------------------------------------------------------
+Test R²:     0.2405
+Test MAE:    9.1896
+Test RMSE:   9.9737
+Train R²:    0.7872
+CV R² Mean:  -0.2417
+CV R² Std:   0.7116
+
+Top 5 Features:
+  6. income_growth                       0.2045
+  2. broadband_access_pct                0.1634
+  4. housing_cost_burden_pct             0.1620
+  1. median_income                       0.1476
+  3. minority_owned_businesses_pct       0.1276
+
+IGS_SCORE
+------------------------------------------------------------
+Test R²:     0.5535
+Test MAE:    10.8454
+Test RMSE:   12.0185
+Train R²:    0.9240
+CV R² Mean:  0.2380
+CV R² Std:   0.6445
+
+Top 5 Features:
+  4. housing_cost_burden_pct             0.4263
+  1. median_income                       0.2034
+  2. broadband_access_pct                0.1776
+  10. early_ed_growth                     0.0509
+  5. early_education_enrollment_pct      0.0446
+
