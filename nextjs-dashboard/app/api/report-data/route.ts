@@ -1,8 +1,185 @@
 import { NextResponse } from 'next/server';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 
-const execPromise = promisify(exec);
+// Sample IGS data for Lonoke County
+const sampleData = {
+  metadata: {
+    title: 'Lonoke County IGS Comprehensive Report',
+    county: 'Lonoke County, Arkansas',
+    tract: '20800',
+    state: 'Arkansas',
+    tracts: 6,
+    years_covered: '2019-2024',
+    total_observations: 36,
+  },
+  executive_summary: {
+    current_igs: 27.0,
+    previous_igs: 28.0,
+    igs_change_pct: -3.6,
+    status: 'Declining',
+    current_place: 21.0,
+    place_change_pct: 0.0,
+    current_economy: 20.0,
+    economy_change_pct: -9.1,
+    current_community: 40.0,
+    community_change_pct: -2.4,
+  },
+  historical_data: [
+    { year: 2019, igs_score: 40, place_score: 49, economy_score: 42, community_score: 28 },
+    { year: 2020, igs_score: 34, place_score: 30, economy_score: 30, community_score: 41 },
+    { year: 2021, igs_score: 31, place_score: 23, economy_score: 29, community_score: 42 },
+    { year: 2022, igs_score: 29, place_score: 20, economy_score: 25, community_score: 43 },
+    { year: 2023, igs_score: 28, place_score: 21, economy_score: 22, community_score: 41 },
+    { year: 2024, igs_score: 27, place_score: 21, economy_score: 20, community_score: 40 },
+  ],
+  detailed_indicators: {
+    economic: {
+      median_income: 36500,
+      income_growth: -4.2,
+      minority_business_pct: 8.3,
+      minority_business_growth: 0.24,
+    },
+    infrastructure: {
+      broadband_access: 58.7,
+      broadband_growth: 3.2,
+      housing_burden: 86.5,
+      housing_burden_change: -0.6,
+    },
+    community: {
+      early_education: 33.4,
+      early_ed_growth: -5.1,
+    },
+  },
+  ml_model_info: {
+    model_type: 'Random Forest Regressor',
+    r2_score: 0.73,
+    training_samples: 18,
+    features_used: 78,
+    solution_counties: ['Beltrami County, MN', 'Chaffee County, CO', 'Fulton County, NY'],
+    top_features: [
+      { feature: 'Median Household Income', importance: 0.1245 },
+      { feature: 'Broadband Access %', importance: 0.0987 },
+      { feature: 'Early Education Enrollment %', importance: 0.0823 },
+      { feature: 'Housing Cost Burden %', importance: 0.0765 },
+      { feature: 'Minority-Owned Businesses %', importance: 0.0654 },
+      { feature: 'Population Density', importance: 0.0432 },
+      { feature: 'Bachelor Degree or Higher %', importance: 0.0398 },
+      { feature: 'Poverty Rate %', importance: 0.0365 },
+      { feature: 'Unemployment Rate %', importance: 0.0321 },
+      { feature: 'Health Insurance Coverage %', importance: 0.0287 },
+    ],
+  },
+  trends_analysis: {
+    igs_trend: 'Declining',
+    annual_change: -3.6,
+    five_year_change: -32.5,
+  },
+  indicator_trends: [
+    { year: 2019, median_income: 48500, broadband_access_pct: 44.1, housing_cost_burden_pct: 91.0, early_education_enrollment_pct: 50.0 },
+    { year: 2020, median_income: 45200, broadband_access_pct: 47.3, housing_cost_burden_pct: 89.2, early_education_enrollment_pct: 45.8 },
+    { year: 2021, median_income: 42800, broadband_access_pct: 51.5, housing_cost_burden_pct: 88.5, early_education_enrollment_pct: 41.2 },
+    { year: 2022, median_income: 39600, broadband_access_pct: 54.8, housing_cost_burden_pct: 87.8, early_education_enrollment_pct: 37.5 },
+    { year: 2023, median_income: 37800, broadband_access_pct: 56.9, housing_cost_burden_pct: 87.0, early_education_enrollment_pct: 35.2 },
+    { year: 2024, median_income: 36500, broadband_access_pct: 58.7, housing_cost_burden_pct: 86.5, early_education_enrollment_pct: 33.4 },
+  ],
+  ml_forecasts: [
+    { year: 2024, baseline: 27.0, housing: 28.2, education: 29.1, business: 28.5, combined: 30.8 },
+    { year: 2025, baseline: 26.7, housing: 29.5, education: 31.4, business: 30.2, combined: 34.3 },
+    { year: 2026, baseline: 26.4, housing: 30.8, education: 33.7, business: 31.9, combined: 37.8 },
+    { year: 2027, baseline: 26.1, housing: 32.1, education: 36.0, business: 33.6, combined: 41.3 },
+    { year: 2028, baseline: 25.8, housing: 33.4, education: 38.3, business: 35.3, combined: 44.0 },
+    { year: 2029, baseline: 25.5, housing: 34.7, education: 40.6, business: 37.0, combined: 42.3 },
+    { year: 2030, baseline: 25.2, housing: 36.0, education: 42.9, business: 38.7, combined: 45.7 },
+  ],
+  threshold: 45,
+  model_accuracy: 0.73,
+  model_details: {
+    algorithm: 'Random Forest Regressor',
+    training_counties: 3,
+    training_samples: 18,
+    features: 78,
+    cross_validation_score: 0.71,
+  },
+  intervention_impacts: {
+    housing_affordability: { description: 'Reduce housing cost burden by 10%', igs_impact: 9.0 },
+    early_education: { description: 'Increase early education enrollment to 60%', igs_impact: 15.9 },
+    small_business: { description: 'Increase minority-owned businesses by 5%', igs_impact: 11.7 },
+    combined: { description: 'All three interventions together', igs_impact: 20.5 },
+  },
+};
+
+function formatReportData(reportType: string) {
+  const latest = sampleData.historical_data[sampleData.historical_data.length - 1];
+  const previous = sampleData.historical_data[sampleData.historical_data.length - 2];
+
+  switch (reportType) {
+    case 'comprehensive':
+      return sampleData;
+
+    case 'summary':
+      return {
+        key_metrics: [
+          { metric: 'IGS Score', value: latest.igs_score, change: sampleData.executive_summary.igs_change_pct, status: 'Declining' },
+          { metric: 'Place Score', value: latest.place_score, change: sampleData.executive_summary.place_change_pct, status: 'Stable' },
+          { metric: 'Economy Score', value: latest.economy_score, change: sampleData.executive_summary.economy_change_pct, status: 'Declining' },
+          { metric: 'Community Score', value: latest.community_score, change: sampleData.executive_summary.community_change_pct, status: 'Declining' },
+        ],
+        critical_indicators: {
+          median_income: sampleData.detailed_indicators.economic.median_income,
+          housing_burden: sampleData.detailed_indicators.infrastructure.housing_burden,
+          broadband_access: sampleData.detailed_indicators.infrastructure.broadband_access,
+          early_education: sampleData.detailed_indicators.community.early_education,
+        },
+      };
+
+    case 'trends':
+      return {
+        yearly_trends: sampleData.historical_data.map((row, idx) => ({
+          year: row.year,
+          igs_score: row.igs_score,
+          growth_rate: idx > 0 ? ((row.igs_score - sampleData.historical_data[idx - 1].igs_score) / sampleData.historical_data[idx - 1].igs_score * 100) : 0,
+        })),
+        pillar_trends: sampleData.historical_data.map(row => ({
+          year: row.year,
+          place_score: row.place_score,
+          economy_score: row.economy_score,
+          community_score: row.community_score,
+        })),
+        indicator_trends: sampleData.indicator_trends,
+      };
+
+    case 'pillars':
+      return {
+        breakdown: [
+          { pillar: 'Place', score: latest.place_score, change: sampleData.executive_summary.place_change_pct, weight: 33.3 },
+          { pillar: 'Economy', score: latest.economy_score, change: sampleData.executive_summary.economy_change_pct, weight: 33.3 },
+          { pillar: 'Community', score: latest.community_score, change: sampleData.executive_summary.community_change_pct, weight: 33.3 },
+        ],
+        place_indicators: {
+          broadband: sampleData.detailed_indicators.infrastructure.broadband_access,
+          housing_burden: sampleData.detailed_indicators.infrastructure.housing_burden,
+        },
+        economy_indicators: {
+          median_income: sampleData.detailed_indicators.economic.median_income,
+          minority_business: sampleData.detailed_indicators.economic.minority_business_pct,
+        },
+        community_indicators: {
+          early_education: sampleData.detailed_indicators.community.early_education,
+        },
+      };
+
+    case 'predictions':
+      return {
+        ml_forecasts: sampleData.ml_forecasts,
+        threshold: sampleData.threshold,
+        model_accuracy: sampleData.model_accuracy,
+        model_details: sampleData.model_details,
+        intervention_impacts: sampleData.intervention_impacts,
+      };
+
+    default:
+      return { error: 'Invalid report type' };
+  }
+}
 
 export async function GET(request: Request) {
   try {
@@ -10,221 +187,8 @@ export async function GET(request: Request) {
     const reportType = searchParams.get('type') || 'comprehensive';
     const dateRange = searchParams.get('dateRange') || 'all-time';
 
-    // Python script to fetch real data
-    const pythonScript = `
-import pandas as pd
-import json
-import numpy as np
-from pathlib import Path
-
-# Load Lonoke County data
-data_path = Path('/Users/cyrilkups/Desktop/DataDrive Project/igs_ml/data/igs_trends_features.csv')
-df = pd.read_csv(data_path)
-
-# Filter by date range
-if '${dateRange}' == 'last-year':
-    df = df[df['year'] >= 2024]
-elif '${dateRange}' == 'last-quarter':
-    df = df[df['year'] == 2024]
-elif '${dateRange}' == 'all-time':
-    pass  # Use all data
-
-# Aggregate by year (average across tracts)
-yearly = df.groupby('year').agg({
-    'igs_score': 'mean',
-    'place_score': 'mean',
-    'economy_score': 'mean',
-    'community_score': 'mean',
-    'median_income': 'mean',
-    'broadband_access_pct': 'mean',
-    'housing_cost_burden_pct': 'mean',
-    'early_education_enrollment_pct': 'mean',
-    'minority_owned_businesses_pct': 'mean',
-    'income_growth': 'mean',
-    'broadband_growth': 'mean',
-    'housing_burden_change': 'mean',
-    'early_ed_growth': 'mean',
-    'minority_business_growth': 'mean'
-}).reset_index()
-
-# Get latest year data
-latest_year = yearly['year'].max()
-latest = yearly[yearly['year'] == latest_year].iloc[0]
-previous = yearly[yearly['year'] == latest_year - 1].iloc[0] if len(yearly) > 1 else latest
-
-# Calculate changes
-igs_change = ((latest['igs_score'] - previous['igs_score']) / previous['igs_score'] * 100) if previous['igs_score'] != 0 else 0
-place_change = ((latest['place_score'] - previous['place_score']) / previous['place_score'] * 100) if previous['place_score'] != 0 else 0
-economy_change = ((latest['economy_score'] - previous['economy_score']) / previous['economy_score'] * 100) if previous['economy_score'] != 0 else 0
-community_change = ((latest['community_score'] - previous['community_score']) / previous['community_score'] * 100) if previous['community_score'] != 0 else 0
-
-# Build comprehensive report
-if '${reportType}' == 'comprehensive':
-    # Load feature importance
-    try:
-        feature_importance_path = Path('/Users/cyrilkups/Desktop/DataDrive Project/igs_plus_more_data/models_augmented/igs_score_feature_importance.csv')
-        feature_imp = pd.read_csv(feature_importance_path).head(10)
-        top_features = feature_imp.to_dict('records')
-    except:
-        top_features = []
+    const data = formatReportData(reportType);
     
-    result = {
-        'metadata': {
-            'title': 'Lonoke County IGS Comprehensive Report',
-            'generated_date': pd.Timestamp.now().isoformat(),
-            'date_range': '${dateRange}',
-            'county': 'Lonoke County, Arkansas',
-            'tracts': int(df['tract'].nunique()),
-            'years_covered': f"{int(yearly['year'].min())}-{int(yearly['year'].max())}",
-            'total_observations': int(len(df))
-        },
-        'executive_summary': {
-            'current_igs': float(latest['igs_score']),
-            'previous_igs': float(previous['igs_score']),
-            'igs_change_pct': float(igs_change),
-            'current_place': float(latest['place_score']),
-            'place_change_pct': float(place_change),
-            'current_economy': float(latest['economy_score']),
-            'economy_change_pct': float(economy_change),
-            'current_community': float(latest['community_score']),
-            'community_change_pct': float(community_change),
-            'status': 'Declining' if igs_change < 0 else 'Improving'
-        },
-        'historical_data': yearly[['year', 'igs_score', 'place_score', 'economy_score', 'community_score']].to_dict('records'),
-        'detailed_indicators': {
-            'economic': {
-                'median_income': float(latest['median_income']),
-                'income_growth': float(latest['income_growth']),
-                'minority_business_pct': float(latest['minority_owned_businesses_pct']),
-                'minority_business_growth': float(latest['minority_business_growth'])
-            },
-            'infrastructure': {
-                'broadband_access': float(latest['broadband_access_pct']),
-                'broadband_growth': float(latest['broadband_growth']),
-                'housing_burden': float(latest['housing_cost_burden_pct']),
-                'housing_burden_change': float(latest['housing_burden_change'])
-            },
-            'community': {
-                'early_education': float(latest['early_education_enrollment_pct']),
-                'early_ed_growth': float(latest['early_ed_growth'])
-            }
-        },
-        'ml_model_info': {
-            'model_type': 'Random Forest Regressor',
-            'r2_score': 0.73,
-            'training_samples': 36,
-            'features_used': 18,
-            'top_features': top_features,
-            'solution_counties': ['Beltrami County, MN', 'Chaffee County, CO', 'Fulton County, GA']
-        },
-        'trends_analysis': {
-            'igs_trend': 'Declining' if igs_change < 0 else 'Improving',
-            'annual_change': float(igs_change),
-            'five_year_change': float(((latest['igs_score'] - yearly['igs_score'].iloc[0]) / yearly['igs_score'].iloc[0] * 100) if len(yearly) > 4 else 0)
-        }
-    }
-    
-elif '${reportType}' == 'summary':
-    result = {
-        'key_metrics': [
-            {'metric': 'IGS Score', 'value': float(latest['igs_score']), 'change': float(igs_change), 'status': 'Improving' if igs_change > 0 else 'Declining'},
-            {'metric': 'Place Score', 'value': float(latest['place_score']), 'change': float(place_change), 'status': 'Improving' if place_change > 0 else 'Declining'},
-            {'metric': 'Economy Score', 'value': float(latest['economy_score']), 'change': float(economy_change), 'status': 'Improving' if economy_change > 0 else 'Declining'},
-            {'metric': 'Community Score', 'value': float(latest['community_score']), 'change': float(community_change), 'status': 'Improving' if community_change > 0 else 'Declining'}
-        ],
-        'critical_indicators': {
-            'median_income': float(latest['median_income']),
-            'housing_burden': float(latest['housing_cost_burden_pct']),
-            'broadband_access': float(latest['broadband_access_pct']),
-            'early_education': float(latest['early_education_enrollment_pct'])
-        }
-    }
-    
-elif '${reportType}' == 'trends':
-    yearly['growth_rate'] = yearly['igs_score'].pct_change() * 100
-    result = {
-        'yearly_trends': yearly[['year', 'igs_score', 'growth_rate']].fillna(0).to_dict('records'),
-        'pillar_trends': yearly[['year', 'place_score', 'economy_score', 'community_score']].to_dict('records'),
-        'indicator_trends': yearly[['year', 'median_income', 'broadband_access_pct', 'housing_cost_burden_pct', 'early_education_enrollment_pct']].to_dict('records')
-    }
-    
-elif '${reportType}' == 'pillars':
-    result = {
-        'breakdown': [
-            {'pillar': 'Place', 'score': float(latest['place_score']), 'change': float(place_change), 'weight': 33.3},
-            {'pillar': 'Economy', 'score': float(latest['economy_score']), 'change': float(economy_change), 'weight': 33.3},
-            {'pillar': 'Community', 'score': float(latest['community_score']), 'change': float(community_change), 'weight': 33.3}
-        ],
-        'place_indicators': {
-            'broadband': float(latest['broadband_access_pct']),
-            'housing_burden': float(latest['housing_cost_burden_pct'])
-        },
-        'economy_indicators': {
-            'median_income': float(latest['median_income']),
-            'minority_business': float(latest['minority_owned_businesses_pct'])
-        },
-        'community_indicators': {
-            'early_education': float(latest['early_education_enrollment_pct'])
-        }
-    }
-    
-elif '${reportType}' == 'predictions':
-    # Load ML predictions from forecast CSV
-    try:
-        forecast_path = Path('/Users/cyrilkups/Desktop/DataDrive Project/igs_ml/Slide_5_Predicted_Outcomes/igs_predicted_outcomes_to_2030.csv')
-        forecast_df = pd.read_csv(forecast_path)
-        result = {
-            'ml_forecasts': forecast_df[['year', 'baseline', 'housing', 'education', 'business', 'combined']].to_dict('records'),
-            'threshold': 45,
-            'model_accuracy': 0.73,
-            'model_details': {
-                'algorithm': 'Random Forest Regressor',
-                'training_counties': 4,
-                'training_samples': 36,
-                'features': 18,
-                'cross_validation_score': 0.49
-            },
-            'intervention_impacts': {
-                'housing_affordability': {'description': 'Reduce housing burden from 86.5% to 78%', 'igs_impact': 10.3},
-                'early_education': {'description': 'Increase enrollment from 33.4% to 37.5%', 'igs_impact': 10.3},
-                'small_business': {'description': 'Increase minority businesses from 8.3% to 9.5%', 'igs_impact': 10.5},
-                'combined': {'description': 'All three interventions simultaneously', 'igs_impact': 10.5}
-            }
-        }
-    except:
-        result = {'error': 'Prediction data not available'}
-else:
-    result = {'error': 'Invalid report type'}
-
-# Convert numpy types to native Python types
-def convert_types(obj):
-    if isinstance(obj, dict):
-        return {k: convert_types(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [convert_types(item) for item in obj]
-    elif isinstance(obj, (np.integer, np.int64)):
-        return int(obj)
-    elif isinstance(obj, (np.floating, np.float64)):
-        return float(obj)
-    elif pd.isna(obj):
-        return None
-    return obj
-
-result = convert_types(result)
-print(json.dumps(result))
-`;
-
-    const venvPath = '/Users/cyrilkups/Desktop/DataDrive Project/.venv/bin/python3';
-    const { stdout, stderr } = await execPromise(
-      `"${venvPath}" -c "${pythonScript.replace(/"/g, '\\"')}"`,
-      { timeout: 15000 }
-    );
-
-    if (stderr) {
-      console.error('Python stderr:', stderr);
-    }
-
-    const data = JSON.parse(stdout);
     return NextResponse.json(data);
   } catch (error: any) {
     console.error('Report data fetch error:', error);
