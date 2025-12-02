@@ -1,5 +1,15 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install"
+  "version": 2,
+  "builds": [
+    {
+      "src": "nextjs-dashboard/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "nextjs-dashboard/$1"
+    }
+  ]
 }
