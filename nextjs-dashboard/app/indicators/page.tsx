@@ -169,7 +169,7 @@ export default function IndicatorsPage() {
       .sort((a, b) =>
         sortKey === "value" ? b.value - a.value : b.trend - a.trend
       );
-  }, [query, sortKey]);
+  }, [query, sortKey, indicators]);
 
   const renderFindingChartModal = () => {
     if (!selectedFindingChart) return null;

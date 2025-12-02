@@ -41,7 +41,7 @@ export default function Header() {
             Welcome back, Cyril
           </h2>
           <p className="text-sm text-gray-500 mt-1">
-            Here's what's happening with your analytics today
+            Here&apos;s what&apos;s happening with your analytics today
           </p>
         </div>
 
