@@ -12,7 +12,7 @@ A modern, responsive analytics dashboard for Inclusive Growth Score (IGS) data v
 
 ## 🚀 Features
 
-- **🔐 Secure Authentication**: 
+- **🔐 Secure Authentication**:
   - User signup/login with NextAuth.js
   - Encrypted password storage (bcrypt)
   - Session management
@@ -55,12 +55,14 @@ cp .env.example .env.local
 ```
 
 Edit `.env.local` and add:
+
 ```
 NEXTAUTH_SECRET=your-secret-here
 NEXTAUTH_URL=http://localhost:3000
 ```
 
 Generate a secure secret:
+
 ```bash
 openssl rand -base64 32
 ```
@@ -76,6 +78,7 @@ npm run dev
 The application will be available at `http://localhost:3000`
 
 ### First Time Setup
+
 1. Visit http://localhost:3000
 2. Click "Sign Up" to create an account
 3. Login with your credentials

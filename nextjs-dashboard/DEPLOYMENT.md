@@ -3,22 +3,26 @@
 ## Deploy to Vercel (Recommended)
 
 ### Step 1: Install Vercel CLI
+
 ```bash
 npm install -g vercel
 ```
 
 ### Step 2: Login to Vercel
+
 ```bash
 vercel login
 ```
 
 ### Step 3: Deploy
+
 ```bash
 cd nextjs-dashboard
 vercel
 ```
 
 Follow the prompts:
+
 - Set up and deploy? **Yes**
 - Which scope? **Your account**
 - Link to existing project? **No**
@@ -41,12 +45,15 @@ NEXTAUTH_URL=https://your-app.vercel.app
 ```
 
 To generate a secure secret:
+
 ```bash
 openssl rand -base64 32
 ```
 
 ### Step 5: Redeploy
+
 After adding environment variables:
+
 ```bash
 vercel --prod
 ```
@@ -54,11 +61,13 @@ vercel --prod
 ## Alternative: Deploy to Netlify
 
 ### Step 1: Install Netlify CLI
+
 ```bash
 npm install -g netlify-cli
 ```
 
 ### Step 2: Login and Deploy
+
 ```bash
 cd nextjs-dashboard
 netlify login
@@ -67,13 +76,16 @@ netlify deploy --prod
 ```
 
 ### Step 3: Set Environment Variables
+
 In Netlify dashboard:
+
 - Go to **Site settings** → **Environment variables**
 - Add `NEXTAUTH_SECRET` and `NEXTAUTH_URL`
 
 ## Important Notes
 
 ### User Data Persistence
+
 The current setup uses file-based storage (`data/users.json`). For production, consider:
 
 1. **Vercel KV** (Redis-compatible)
@@ -82,6 +94,7 @@ The current setup uses file-based storage (`data/users.json`). For production, c
 4. **PlanetScale** (MySQL)
 
 ### Security Checklist
+
 - ✅ Change `NEXTAUTH_SECRET` to a strong random value
 - ✅ Update `NEXTAUTH_URL` to your production domain
 - ✅ Enable HTTPS (automatic with Vercel/Netlify)
@@ -89,7 +102,9 @@ The current setup uses file-based storage (`data/users.json`). For production, c
 - ✅ Set up monitoring and error tracking
 
 ### Testing Deployment
+
 After deployment, test:
+
 1. User signup works
 2. User login works
 3. Session persistence
@@ -106,15 +121,18 @@ Add this to your README:
 ## Troubleshooting
 
 ### Issue: Authentication not working
+
 - Check `NEXTAUTH_SECRET` is set
 - Verify `NEXTAUTH_URL` matches your domain
 - Ensure environment variables are deployed
 
 ### Issue: Users not persisting
+
 - File-based storage doesn't work well on Vercel (read-only filesystem)
 - Migrate to a database solution (see User Data Persistence above)
 
 ### Issue: API routes failing
+
 - All API routes are now serverless-compatible (no Python dependencies)
 - Check Vercel function logs for errors
 
