@@ -1,43 +1,24 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
+import { getUserByEmail, createUser } from './db';
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
   password: string;
 }
 
-const getUsersFilePath = () => path.join(process.cwd(), 'data', 'users.json');
-
-export const getUsers = (): User[] => {
-  try {
-    const filePath = getUsersFilePath();
-    if (!fs.existsSync(filePath)) {
-      return [];
-    }
-    const data = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error reading users:', error);
-    return [];
-  }
+// Legacy functions for backward compatibility
+export const getUsers = async () => {
+  // No longer used - kept for compatibility
+  return [];
 };
 
-export const saveUsers = (users: User[]) => {
-  try {
-    const filePath = getUsersFilePath();
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
-  } catch (error) {
-    console.error('Error saving users:', error);
-  }
+export const saveUsers = async (users: User[]) => {
+  // No longer used - kept for compatibility
+  console.warn('saveUsers is deprecated - use database functions instead');
 };
 
 export const authOptions: NextAuthOptions = {
@@ -53,8 +34,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const users = getUsers();
-        const user = users.find(u => u.email === credentials.email);
+        const user = await getUserByEmail(credentials.email);
 
         if (!user) {
           return null;

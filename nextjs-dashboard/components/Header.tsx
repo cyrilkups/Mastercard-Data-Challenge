@@ -3,16 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Search, Bell, ChevronDown } from "lucide-react";
-import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
-  const { data: session } = useSession();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
-  const userName = session?.user?.name || "User";
-  const userEmail = session?.user?.email || "user@example.com";
+  const userName = "Guest User";
+  const userEmail = "guest@datanova.com";
   const userInitials = userName
     .split(" ")
     .map((n) => n[0])
@@ -44,26 +42,35 @@ export default function Header() {
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="bg-white border-b border-gray-200 px-8 py-4">
-      <div className="flex items-center justify-between">
+    <header className="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4">
+      <div className="flex items-center justify-between gap-4">
         {/* Welcome Text */}
-        <div>
-          <h2 className="text-2xl font-poppins font-semibold text-gray-900">
-            Welcome back, {userName}
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-poppins font-semibold text-gray-900 truncate">
+            <span className="hidden sm:inline">Welcome back, </span>
+            {userName}
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
-            Here&apos;s what&apos;s happening with your analytics today
+          <p className="text-xs sm:text-sm text-gray-500 mt-1 flex flex-wrap items-center gap-1 sm:gap-2">
+            <span className="hidden sm:inline">
+              Here&apos;s what&apos;s happening with your
+            </span>
+            <span className="sm:hidden">Analytics for</span>{" "}
+            <span className="px-2 py-0.5 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-700 rounded font-medium text-xs sm:text-sm whitespace-nowrap">
+              Lonoke County
+            </span>{" "}
+            <span className="hidden sm:inline">analytics today</span>
           </p>
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6">
           {/* Search */}
           <button
             onClick={() => setShowSearch(true)}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Search"
           >
-            <Search size={20} className="text-gray-600" />
+            <Search size={18} className="text-gray-600 sm:w-5 sm:h-5" />
           </button>
 
           {/* Notifications */}
@@ -71,8 +78,9 @@ export default function Header() {
             <button
               onClick={() => setShowNotifications(!showNotifications)}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative"
+              aria-label="Notifications"
             >
-              <Bell size={20} className="text-gray-600" />
+              <Bell size={18} className="text-gray-600 sm:w-5 sm:h-5" />
               {unreadCount > 0 && (
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               )}
@@ -80,7 +88,7 @@ export default function Header() {
 
             {/* Notifications Dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+              <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-w-[calc(100vw-2rem)]">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="font-semibold text-gray-900">Notifications</h3>
                 </div>
@@ -105,12 +113,13 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => setShowProfile(!showProfile)}
-              className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 sm:gap-3 hover:bg-gray-100 px-2 sm:px-3 py-2 rounded-lg transition-colors"
+              aria-label="User menu"
             >
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-primary to-orange-accent flex items-center justify-center text-white font-semibold text-sm">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-purple-primary to-orange-accent flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
                 {userInitials}
               </div>
-              <ChevronDown size={16} className="text-gray-600" />
+              <ChevronDown size={14} className="text-gray-600 sm:w-4 sm:h-4" />
             </button>
 
             {/* Profile Dropdown */}
@@ -124,11 +133,8 @@ export default function Header() {
                   <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
                     Profile Settings
                   </button>
-                  <button
-                    onClick={() => signOut({ callbackUrl: "/login" })}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg mt-2"
-                  >
-                    Sign Out
+                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+                    Preferences
                   </button>
                 </div>
               </div>

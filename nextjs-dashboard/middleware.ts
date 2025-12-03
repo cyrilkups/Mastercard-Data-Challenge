@@ -1,14 +1,9 @@
-import { withAuth } from 'next-auth/middleware';
-
-// Only protect API routes, not pages (handled by PreLoader)
-export default withAuth({
-  pages: {
-    signIn: '/login',
-  },
-});
+// No authentication middleware needed
+export default function middleware() {
+  // All routes are public
+  return;
+}
 
 export const config = {
-  matcher: [
-    '/api/protected/:path*',
-  ],
+  matcher: [],
 };

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { getUsers, saveUsers } from '@/lib/auth';
+import { getUserByEmail, createUser } from '@/lib/db';
 
 export async function POST(request: Request) {
   try {
@@ -13,10 +13,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const users = getUsers();
-
     // Check if user already exists
-    if (users.find(u => u.email === email)) {
+    const existingUser = await getUserByEmail(email);
+    if (existingUser) {
       return NextResponse.json(
         { error: 'User with this email already exists' },
         { status: 400 }
@@ -27,15 +26,19 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const newUser = {
+    const newUser = await createUser({
       id: Date.now().toString(),
       name,
       email,
       password: hashedPassword,
-    };
+    });
 
-    users.push(newUser);
-    saveUsers(users);
+    if (!newUser) {
+      return NextResponse.json(
+        { error: 'Failed to create user' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { message: 'User created successfully', user: { id: newUser.id, name, email } },

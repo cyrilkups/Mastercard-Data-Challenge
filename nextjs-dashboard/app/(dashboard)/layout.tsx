@@ -3,8 +3,6 @@ import { Inter, Poppins } from "next/font/google";
 import "../globals.css";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import PreLoader from "@/components/PreLoader";
-import SessionProvider from "@/components/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -29,18 +27,15 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        <SessionProvider>
-          <PreLoader />
-          <div className="flex h-screen overflow-hidden">
-            <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden">
-              <Header />
-              <main className="flex-1 overflow-y-auto bg-[#F5F7FA] p-8">
-                {children}
-              </main>
-            </div>
+        <div className="flex h-screen overflow-hidden">
+          <Sidebar />
+          <div className="flex-1 flex flex-col overflow-hidden w-full lg:w-auto">
+            <Header />
+            <main className="flex-1 overflow-y-auto bg-[#F5F7FA] p-4 sm:p-6 lg:p-8">
+              {children}
+            </main>
           </div>
-        </SessionProvider>
+        </div>
       </body>
     </html>
   );

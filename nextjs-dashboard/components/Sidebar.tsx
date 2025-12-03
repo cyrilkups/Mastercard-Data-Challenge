@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   TrendingUp,
@@ -19,6 +19,7 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
+  Menu,
 } from "lucide-react";
 
 const navItems = [
@@ -42,6 +43,27 @@ export default function Sidebar() {
   const [showHelp, setShowHelp] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth < 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleContactUs = () => {
     window.location.href =
@@ -50,18 +72,48 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* Mobile Menu Overlay */}
+      {isMobile && isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu Toggle Button */}
+      {isMobile && (
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="fixed top-4 left-4 z-50 lg:hidden bg-purple-primary hover:bg-purple-600 text-white p-2 rounded-lg shadow-lg"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      )}
+
       <aside
         className={`${
-          isCollapsed ? "w-20" : "w-64"
-        } bg-navy-deep text-white flex flex-col h-screen transition-all duration-300 relative`}
+          isCollapsed && !isMobile ? "w-20" : "w-64"
+        } bg-navy-deep text-white flex flex-col h-screen transition-all duration-300 ${
+          isMobile
+            ? `fixed inset-y-0 left-0 z-40 transform ${
+                isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+              }`
+            : "relative"
+        }`}
       >
-        {/* Collapse Toggle Button */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute -right-3 top-8 bg-purple-primary hover:bg-purple-600 text-white rounded-full p-1.5 shadow-lg z-10 transition-colors"
-        >
-          {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-        </button>
+        {/* Collapse Toggle Button (Desktop Only) */}
+        {!isMobile && (
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="absolute -right-3 top-8 bg-purple-primary hover:bg-purple-600 text-white rounded-full p-1.5 shadow-lg z-10 transition-colors"
+          >
+            {isCollapsed ? (
+              <ChevronRight size={16} />
+            ) : (
+              <ChevronLeft size={16} />
+            )}
+          </button>
+        )}
 
         {/* Logo Section */}
         <div className="p-6 border-b border-white/10">
@@ -75,7 +127,7 @@ export default function Sidebar() {
                 className="object-contain"
               />
             </div>
-            {!isCollapsed && (
+            {(!isCollapsed || isMobile) && (
               <div>
                 <h1 className="text-xl font-poppins font-semibold">
                   Data Nova
@@ -100,7 +152,7 @@ export default function Sidebar() {
                   title={isCollapsed ? item.name : undefined}
                   className={`
                   flex items-center ${
-                    isCollapsed ? "justify-center" : "gap-3"
+                    isCollapsed && !isMobile ? "justify-center" : "gap-3"
                   } px-4 py-3 rounded-lg transition-all duration-200
                   ${
                     isActive
@@ -110,7 +162,7 @@ export default function Sidebar() {
                 `}
                 >
                   <Icon size={20} />
-                  {!isCollapsed && (
+                  {(!isCollapsed || isMobile) && (
                     <span className="text-sm font-medium">{item.name}</span>
                   )}
                 </Link>
@@ -120,7 +172,7 @@ export default function Sidebar() {
 
           {/* Help & Support Section */}
           <div className="mt-12 pt-6 border-t border-white/10">
-            {!isCollapsed && (
+            {(!isCollapsed || isMobile) && (
               <p className="text-xs text-grey-muted uppercase tracking-wide mb-3 px-4">
                 Help & Support
               </p>
@@ -128,25 +180,25 @@ export default function Sidebar() {
             <div className="space-y-1">
               <button
                 onClick={() => setShowHelp(true)}
-                title={isCollapsed ? "Help Centre" : undefined}
+                title={isCollapsed && !isMobile ? "Help Centre" : undefined}
                 className={`w-full flex items-center ${
-                  isCollapsed ? "justify-center" : "gap-3"
+                  isCollapsed && !isMobile ? "justify-center" : "gap-3"
                 } px-4 py-3 rounded-lg text-grey-muted hover:bg-white/5 hover:text-white transition-all duration-200`}
               >
                 <HelpCircle size={20} />
-                {!isCollapsed && (
+                {(!isCollapsed || isMobile) && (
                   <span className="text-sm font-medium">Help Centre</span>
                 )}
               </button>
               <button
                 onClick={handleContactUs}
-                title={isCollapsed ? "Contact Us" : undefined}
+                title={isCollapsed && !isMobile ? "Contact Us" : undefined}
                 className={`w-full flex items-center ${
-                  isCollapsed ? "justify-center" : "gap-3"
+                  isCollapsed && !isMobile ? "justify-center" : "gap-3"
                 } px-4 py-3 rounded-lg text-grey-muted hover:bg-white/5 hover:text-white transition-all duration-200`}
               >
                 <Mail size={20} />
-                {!isCollapsed && (
+                {(!isCollapsed || isMobile) && (
                   <span className="text-sm font-medium">Contact Us</span>
                 )}
               </button>
@@ -157,16 +209,16 @@ export default function Sidebar() {
         {/* Logout Button */}
         <div className="p-4 border-t border-white/10">
           <button
-            title={isCollapsed ? "Logout" : undefined}
+            title={isCollapsed && !isMobile ? "Logout" : undefined}
             className={`w-full flex items-center ${
-              isCollapsed ? "justify-center" : "gap-3"
+              isCollapsed && !isMobile ? "justify-center" : "gap-3"
             } px-4 py-3 rounded-lg text-grey-muted hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 group`}
           >
             <LogOut
               size={20}
               className="group-hover:scale-110 transition-transform"
             />
-            {!isCollapsed && (
+            {(!isCollapsed || isMobile) && (
               <span className="text-sm font-medium">Logout</span>
             )}
           </button>
