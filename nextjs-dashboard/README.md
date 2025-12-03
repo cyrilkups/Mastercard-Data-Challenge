@@ -1,19 +1,33 @@
 # Data Nova Analytics Dashboard - Next.js + Tailwind CSS
 
-A modern, responsive analytics dashboard for Inclusive Growth Score (IGS) data visualization and analysis.
+A modern, responsive analytics dashboard for Inclusive Growth Score (IGS) data visualization and analysis with secure authentication and ML-powered policy simulation.
+
+## 🌐 Deploy for Team Access
+
+**Want others to access your platform?** Deploy to Vercel in minutes!
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/cyrilkups/Mastercard-Data-Challenge)
+
+📖 See [DEPLOY_NOW.md](./DEPLOY_NOW.md) for quick deployment instructions
 
 ## 🚀 Features
 
+- **🔐 Secure Authentication**: 
+  - User signup/login with NextAuth.js
+  - Encrypted password storage (bcrypt)
+  - Session management
+  - Protected routes
 - **Modern Tech Stack**: Next.js 14 with App Router, TypeScript, and Tailwind CSS
 - **Power BI Styling**: Deep navy sidebar (#0D1035) with orange accents (#FFA33F)
 - **Real-time Updates**: Live metric updates every 5 seconds
 - **Interactive Components**:
   - 4 metric cards with trend indicators (IGS, Place, Economy, Community)
-  - Policy simulation with working Run Scenario button
+  - ML-powered policy simulation (client-side, no Python required)
   - Report exports (PDF, CSV, JSON) with full functionality
   - Detailed recommendations page with professional layout
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Data Visualization**: Recharts integration for interactive charts
+- **Production Ready**: No Python dependencies, fully serverless
 
 ## 📋 Prerequisites
 
@@ -34,6 +48,23 @@ cd "/Users/cyrilkups/Desktop/DataDrive Project/nextjs-dashboard"
 npm install
 ```
 
+3. Set up environment variables:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and add:
+```
+NEXTAUTH_SECRET=your-secret-here
+NEXTAUTH_URL=http://localhost:3000
+```
+
+Generate a secure secret:
+```bash
+openssl rand -base64 32
+```
+
 ## 🏃 Running the Application
 
 ### Development Mode
@@ -43,6 +74,12 @@ npm run dev
 ```
 
 The application will be available at `http://localhost:3000`
+
+### First Time Setup
+1. Visit http://localhost:3000
+2. Click "Sign Up" to create an account
+3. Login with your credentials
+4. Access all dashboard features
 
 ### Production Build
 
