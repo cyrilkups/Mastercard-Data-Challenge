@@ -15,7 +15,6 @@ import {
   Settings,
   HelpCircle,
   Mail,
-  LogOut,
   X,
   ChevronLeft,
   ChevronRight,
@@ -205,24 +204,6 @@ export default function Sidebar() {
             </div>
           </div>
         </nav>
-
-        {/* Logout Button */}
-        <div className="p-4 border-t border-white/10">
-          <button
-            title={isCollapsed && !isMobile ? "Logout" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed && !isMobile ? "justify-center" : "gap-3"
-            } px-4 py-3 rounded-lg text-grey-muted hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 group`}
-          >
-            <LogOut
-              size={20}
-              className="group-hover:scale-110 transition-transform"
-            />
-            {(!isCollapsed || isMobile) && (
-              <span className="text-sm font-medium">Logout</span>
-            )}
-          </button>
-        </div>
       </aside>
 
       {/* Help Center Modal */}
