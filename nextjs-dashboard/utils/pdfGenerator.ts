@@ -208,13 +208,13 @@ function formatDataForPDF(reportType: string) {
           {
             title: 'Key Metrics Overview',
             table: {
-              head: [['Metric', 'Value', 'Change %', 'Status']],
-              body: data.key_metrics?.map((metric: any) => [
-                metric.metric,
-                metric.value?.toFixed(2) || 'N/A',
-                metric.change?.toFixed(2) + '%' || 'N/A',
-                metric.status || 'N/A'
-              ]) || []
+              head: [['Metric', 'Current Value', 'Change %', 'Status']],
+              body: [
+                ['IGS Score', data.executive_summary?.current_igs?.toFixed(2) || 'N/A', data.executive_summary?.igs_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.status || 'N/A'],
+                ['Place Score', data.executive_summary?.current_place?.toFixed(2) || 'N/A', data.executive_summary?.place_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.place_change_pct != null ? (data.executive_summary.place_change_pct > 0 ? 'Improving' : 'Stable') : 'N/A'],
+                ['Economy Score', data.executive_summary?.current_economy?.toFixed(2) || 'N/A', data.executive_summary?.economy_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.economy_change_pct != null ? (data.executive_summary.economy_change_pct > 0 ? 'Improving' : 'Declining') : 'N/A'],
+                ['Community Score', data.executive_summary?.current_community?.toFixed(2) || 'N/A', data.executive_summary?.community_change_pct?.toFixed(2) + '%' || 'N/A', data.executive_summary?.community_change_pct != null ? (data.executive_summary.community_change_pct > 0 ? 'Improving' : 'Declining') : 'N/A']
+              ]
             }
           }
         ]
@@ -225,22 +225,12 @@ function formatDataForPDF(reportType: string) {
         title: 'Lonoke County - Trends Analysis',
         sections: [
           {
-            title: 'Year-over-Year Growth Analysis',
+            title: 'Historical Trends (2019-2024)',
             table: {
-              head: [['Year', 'IGS Score', 'Growth Rate %']],
-              body: data.yearly_trends?.map((row: any) => [
+              head: [['Year', 'IGS Score', 'Place Score', 'Economy Score', 'Community Score']],
+              body: data.historical_data?.map((row: any) => [
                 row.year.toString(),
                 row.igs_score?.toFixed(2) || 'N/A',
-                row.growth_rate?.toFixed(2) || 'N/A'
-              ]) || []
-            }
-          },
-          {
-            title: 'Pillar Trends Over Time',
-            table: {
-              head: [['Year', 'Place Score', 'Economy Score', 'Community Score']],
-              body: data.pillar_trends?.map((row: any) => [
-                row.year.toString(),
                 row.place_score?.toFixed(2) || 'N/A',
                 row.economy_score?.toFixed(2) || 'N/A',
                 row.community_score?.toFixed(2) || 'N/A'
@@ -248,16 +238,27 @@ function formatDataForPDF(reportType: string) {
             }
           },
           {
-            title: 'Key Indicator Trends',
+            title: 'Trend Summary',
             table: {
-              head: [['Year', 'Median Income', 'Broadband %', 'Housing Burden %', 'Early Ed %']],
-              body: data.indicator_trends?.map((row: any) => [
-                row.year.toString(),
-                '$' + (row.median_income?.toFixed(0) || 'N/A'),
-                row.broadband_access_pct?.toFixed(1) || 'N/A',
-                row.housing_cost_burden_pct?.toFixed(1) || 'N/A',
-                row.early_education_enrollment_pct?.toFixed(1) || 'N/A'
-              ]) || []
+              head: [['Metric', 'Value']],
+              body: [
+                ['Overall Trend', data.trends_analysis?.igs_trend || 'N/A'],
+                ['Annual Change %', data.trends_analysis?.annual_change?.toFixed(2) || 'N/A'],
+                ['5-Year Change %', data.trends_analysis?.five_year_change?.toFixed(2) || 'N/A']
+              ]
+            }
+          },
+          {
+            title: 'Key Economic Indicators',
+            table: {
+              head: [['Indicator', 'Current Value', 'Change %']],
+              body: [
+                ['Median Income', '$' + (data.detailed_indicators?.economic?.median_income?.toFixed(0) || 'N/A'), data.detailed_indicators?.economic?.income_growth?.toFixed(2) + '%' || 'N/A'],
+                ['Minority Business %', data.detailed_indicators?.economic?.minority_business_pct?.toFixed(1) + '%' || 'N/A', data.detailed_indicators?.economic?.minority_business_growth?.toFixed(2) + '%' || 'N/A'],
+                ['Broadband Access %', data.detailed_indicators?.infrastructure?.broadband_access?.toFixed(1) + '%' || 'N/A', data.detailed_indicators?.infrastructure?.broadband_growth?.toFixed(2) + '%' || 'N/A'],
+                ['Housing Burden %', data.detailed_indicators?.infrastructure?.housing_burden?.toFixed(1) + '%' || 'N/A', data.detailed_indicators?.infrastructure?.housing_burden_change?.toFixed(2) + '%' || 'N/A'],
+                ['Early Education %', data.detailed_indicators?.community?.early_education?.toFixed(1) + '%' || 'N/A', data.detailed_indicators?.community?.early_ed_growth?.toFixed(2) + '%' || 'N/A']
+              ]
             }
           }
         ]
@@ -270,41 +271,40 @@ function formatDataForPDF(reportType: string) {
           {
             title: 'Three Pillars of Inclusive Growth',
             table: {
-              head: [['Pillar', 'Score', 'Change %', 'Weight %']],
-              body: data.breakdown?.map((pillar: any) => [
-                pillar.pillar,
-                pillar.score?.toFixed(2) || 'N/A',
-                pillar.change?.toFixed(2) || 'N/A',
-                pillar.weight?.toFixed(1) || 'N/A'
-              ]) || []
+              head: [['Pillar', 'Current Score', 'Change %']],
+              body: [
+                ['Place', data.executive_summary?.current_place?.toFixed(2) || 'N/A', data.executive_summary?.place_change_pct?.toFixed(2) + '%' || 'N/A'],
+                ['Economy', data.executive_summary?.current_economy?.toFixed(2) || 'N/A', data.executive_summary?.economy_change_pct?.toFixed(2) + '%' || 'N/A'],
+                ['Community', data.executive_summary?.current_community?.toFixed(2) || 'N/A', data.executive_summary?.community_change_pct?.toFixed(2) + '%' || 'N/A']
+              ]
             }
           },
           {
             title: 'Place Pillar Indicators',
             table: {
-              head: [['Indicator', 'Value']],
+              head: [['Indicator', 'Value', 'Change %']],
               body: [
-                ['Broadband Access', (data.place_indicators?.broadband?.toFixed(1) || 'N/A') + '%'],
-                ['Housing Cost Burden', (data.place_indicators?.housing_burden?.toFixed(1) || 'N/A') + '%']
+                ['Broadband Access', (data.detailed_indicators?.infrastructure?.broadband_access?.toFixed(1) || 'N/A') + '%', (data.detailed_indicators?.infrastructure?.broadband_growth?.toFixed(2) || 'N/A') + '%'],
+                ['Housing Cost Burden', (data.detailed_indicators?.infrastructure?.housing_burden?.toFixed(1) || 'N/A') + '%', (data.detailed_indicators?.infrastructure?.housing_burden_change?.toFixed(2) || 'N/A') + '%']
               ]
             }
           },
           {
             title: 'Economy Pillar Indicators',
             table: {
-              head: [['Indicator', 'Value']],
+              head: [['Indicator', 'Value', 'Change %']],
               body: [
-                ['Median Income', '$' + (data.economy_indicators?.median_income?.toFixed(0) || 'N/A')],
-                ['Minority-Owned Businesses', (data.economy_indicators?.minority_business?.toFixed(1) || 'N/A') + '%']
+                ['Median Income', '$' + (data.detailed_indicators?.economic?.median_income?.toFixed(0) || 'N/A'), (data.detailed_indicators?.economic?.income_growth?.toFixed(2) || 'N/A') + '%'],
+                ['Minority-Owned Businesses', (data.detailed_indicators?.economic?.minority_business_pct?.toFixed(1) || 'N/A') + '%', (data.detailed_indicators?.economic?.minority_business_growth?.toFixed(2) || 'N/A') + '%']
               ]
             }
           },
           {
             title: 'Community Pillar Indicators',
             table: {
-              head: [['Indicator', 'Value']],
+              head: [['Indicator', 'Value', 'Change %']],
               body: [
-                ['Early Education Enrollment', (data.community_indicators?.early_education?.toFixed(1) || 'N/A') + '%']
+                ['Early Education Enrollment', (data.detailed_indicators?.community?.early_education?.toFixed(1) || 'N/A') + '%', (data.detailed_indicators?.community?.early_ed_growth?.toFixed(2) || 'N/A') + '%']
               ]
             }
           }
